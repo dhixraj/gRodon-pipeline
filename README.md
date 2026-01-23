@@ -21,7 +21,12 @@ Once you have logged in, you can download a copy of the tutorial into your direc
 git clone https://github.com/dhixraj/gRodon-pipeline.git
 cd gRodon-pipeline
 ```
-This pipeline is developed with settings that you can change based on your requirements. The ```scripts``` folder has slurm/R scripts that are ready to be submitted (which small changes to file paths, of course). 
+This pipeline is developed with settings that you can change based on your requirements. The ```scripts``` folder has slurm/R scripts that are ready to be submitted (which small changes to file paths, of course).
+
+```bash
+cd scripts
+```
+This is where all of the code lives. Submit jobs from this directory.
 
 # 00. Setting up directories
 Organization. Super important. Go ahead and
