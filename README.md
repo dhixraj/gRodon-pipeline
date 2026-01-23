@@ -53,5 +53,44 @@ sbatch 01_taxonomic_classification_blast.sh
 for me. 
 
 This gives us the output file ```blast_results.txt```
+### Understanding these results:
+Here's an example output:
+```
+ASV_52732 GB_GCA_000756795.1~CCSI01000004.1 97.088 373 67 9 2 368 473 840 1.29e-63 246
+```
+Each line in the file represents a hit, which is a match between one of your sequences and a sequence in the GTDB database.
+1. ```ASV_52732```: The Query Sequence ID. This is one of your unique sequences from the repset.fasta file.
+2. ```GB_GCA_```: The Subject Sequence ID. This is the unique identifier for the matching sequence from the GTDB database (our GTDB accession number)
+3. ```97.088```: Percent Identity. The percentage of identical bases between your query sequence and the subject sequence.
+4. ```373```: Alignment Length. The total number of base pairs that were aligned between the two sequences.
+5. ```67```: Mismatches. The number of bases that were different.
+6. ```9```: Gap Openings. The number of gaps introduced in the alignment.
+7. ```2```: Query Start. The starting position of the match on your query sequence.
+8. ```368```: Query End. The ending position of the match on your query sequence.
+9. ```473```: Subject Start. The starting position of the match on the GTDB sequence.
+10. ```840```: Subject End. The ending position of the match on the GTDB sequence.
+11. ```1.29e-63```: E-value. A statistical value that indicates the probability of getting a match this good by random chance (a lower E-value is better).
+12. ```246```: Bit Score. The raw score of the alignment, normalized for database size. A higher bit score is better.
 
-# 02. 
+# 02. Extracting GTDB accession numbers from BLAST results
+In this step, we are extracting all of the unique GTDB accession numbers from our BLAST results. This is a pretty quick step!
+
+Go ahead and
+```
+sbatch 02_parse_blast_results.sh
+```
+Our output file is a ```gtdb_accessions.txt``` file with our accession numbers, and a ```blast_parsed_results.tsv``` file that is human-readable with details about your ASVs, its corresponding accession number (genome ID), and all other necessary information.
+
+# 03. Filtering the required genomes from the GTDB database
+In this step, we are reading the full list of GTDB accession numbers and copying the corresponding full genome files from the large database into a new directory. This will also be a quick step. 
+```
+sbatch 03_filter_genomes.sh
+```
+The corresponding genomes will be copied into the ```gRodon_filtered_genomes``` directory.
+
+# 04. Genome annotation with Prokka
+The goal of this step is to use ```Prokka``` to perform rapid gene prediction and functional annotation on our filtered genomes. Initially, this step was split into two, where ```Prodigal``` was used to predict open reading frames (ORFs), and the ribosomal protein identification was done by BLASTing against the GTDB protein database. This was extremely long and time-consuming. ```Prokka``` will directly identify coding sequences (ORFs) and assign them biological functions, preparing the data for gRodon.
+
+Some context – An open reading frame (ORF) is a part of the DNA (or RNA) sequence that can be translated into amino acids (which make up proteins). It is a stretch of codons that begins with a start codon (ATG in DNA, translated into AUG in mRNA), and ends with a stop codon (TAA/TAG/TGA, translated into UAA/UAG/UGA in mRNA). Prodigal is used to find and predict ORFs from our sequences. Prokka can find the ORFs and assign gene functions together.
+
+
