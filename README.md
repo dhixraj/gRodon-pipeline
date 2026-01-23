@@ -131,8 +131,8 @@ Congrats! You have successfully predicted the maximal growth rates of ASVs in yo
 
 # Next steps
 Please make sure to cite all the appropriate scientists for their awesome work on this pipeline!
-Dhiraj S Naidu (me!) - For enduring long hours of coding, troubleshooting, and optimizing. (https://github.com/dhixraj)
-Hannah Holland-Moritz - For guidance and support in every step of the process. (https://github.com/hhollandmoritz)
-JL Weissman - For developing gRodon. (https://github.com/jlw-ecoevo)
-Torsten Seemann - For developing Prokka. (https://github.com/tseemann)
-Nathan D Blais - For mentoring me and pushing me to do more. 
+1. Dhiraj S Naidu (me!) - For enduring long hours of coding, troubleshooting, and optimizing. (https://github.com/dhixraj)
+2. Hannah Holland-Moritz - For guidance and support in every step of the process. (https://github.com/hhollandmoritz)
+3. JL Weissman - For developing gRodon. (https://github.com/jlw-ecoevo)
+4. Torsten Seemann - For developing Prokka. (https://github.com/tseemann)
+5. Nathan D Blais - For mentoring me and pushing me to do more. 
