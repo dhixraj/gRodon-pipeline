@@ -1,19 +1,15 @@
-This pipeline estimates maximal bacterial growth rates of ASVs from 16S rRNA amplicon data using gRodon by retrieving species-specific metagenomes from GTDB.
-
 # GENERAL OVERVIEW OF PIPELINE
+This pipeline estimates maximal bacterial growth rates of ASVs from 16S rRNA amplicon data using gRodon by retrieving species-specific metagenomes from GTDB. The whole process involves the following steps:
 1. Taxonomic Mapping (BLAST): ASV sequences are aligned against the GTDB Small Subunit (SSU) representative database to find the closest matching reference genome.
-
 2. Genome Retrieval: The full genome assemblies for the matched GTDB accessions are retrieved/filtered from the GTDB database.
-
 3. Functional Annotation (Prokka): Genomes undergo rapid annotation to identify coding sequences (CDS) and highly expressed genes (ribosomal proteins), which are required inputs for growth rate prediction.
-
 4. Growth Rate Prediction (gRodon): The gRodon package calculates the maximal growth rate through codon usage bias.
 
 # Prelimemary Checklist - Before you begin
-## There are a few essentials you need before you can run this pipeline:
-1. Ensure that you have processed your data through the dada2pipeline (https://github.com/ErnakovichLab/dada2_ernakovichlab). This will produce a repset.fasta file (in the 03 folder).
+### There are a few essentials you need before you can run this pipeline:
+1. Ensure that you have processed your data through the dada2pipeline (https://github.com/ErnakovichLab/dada2_ernakovichlab). This will produce a repset.fasta file (in the 03_tabletax folder).
 2. Ensure that you know your desired BLAST settings as this can vary per project. I will talk about this more during the BLAST step.
-3. Ensure that you know how Prokka works (https://github.com/tseemann/prokka).
+3. Familiarize yourself with how Prokka works (https://github.com/tseemann/prokka).
 4. And finally, familiarize yourself with how gRodon works (https://github.com/jlw-ecoevo/gRodon2).
 
 ### NOTE: There is a newer program developed by JL called Phydon. Look into it.
@@ -38,11 +34,14 @@ Ensure that you have an outputs directory created outside your scripts directory
 # 01. Taxonomic Classification
 In this step, we are comparing (BLASTing) each of your ASV sequences against the known representative 16s rRNA sequences in the GTDB database.
 
+What is BLAST? 
+BLAST (Basic Local Alignment Search Tool) is a widely used algorithm that compares your biological sequences (like DNA or protein) against a reference database to find the closest matches, helping you identify taxonomy or function of sequences.
+
 Optimization settings:
-1. Using megablast: much more efficient and quicker.
-2. perc_identity 95: CHANGE ME BASED ON YOUR PROJECT! 95-97 percent identity is usually good, but you can make this higher/lower depending on your project.
-3. max_target_seqs 1: keeps only the best hit, prevents redundant hits for the same genome. You might want more hits - something to consider.
-4. max_hsps 1: this basically tells BLAST - For any given ASV and the database sequence it matches, only show me the single best alignment region. Don't show me other weaker alignments!
+1. ```megablast```: A quicker and more efficient version of BLAST.
+2. ```perc_identity 95```: CHANGE ME BASED ON YOUR PROJECT! 95-97 percent identity is usually good, but you can make this higher/lower depending on your project.
+3. ```max_target_seqs 1```: keeps only the best hit, prevents redundant hits for the same genome. You might want more hits - something to consider.
+4. ```max_hsps 1```: this basically tells BLAST - For any given ASV and the database sequence it matches, only show me the single best alignment region. Don't show me other weaker alignments!
 
 ### NOTE: This is a <ins>LONG STEP</ins>!
 
@@ -93,4 +92,47 @@ The goal of this step is to use ```Prokka``` to perform rapid gene prediction an
 
 Some context – An open reading frame (ORF) is a part of the DNA (or RNA) sequence that can be translated into amino acids (which make up proteins). It is a stretch of codons that begins with a start codon (ATG in DNA, translated into AUG in mRNA), and ends with a stop codon (TAA/TAG/TGA, translated into UAA/UAG/UGA in mRNA). Prodigal is used to find and predict ORFs from our sequences. Prokka can find the ORFs and assign gene functions together.
 
+### NOTE: This is a <ins>LONG STEP</ins>!
 
+You know what to do
+```
+sbatch scripts/04_run_prokka.sh
+```
+The annotated files are in the ```prokka_annotations``` folder.
+
+## 05. Running gRodon
+You have made it to the last step of this pipeline with (hopefully) no issues! We will finally be running gRodon on the genomes to predict their growth rates.
+This step has a slurm script AND an R script (since gRodon is an R package). 
+
+### NOTE: Depending on the number of samples and species diversity, this step can take anywhere from 5-6 hours to a whole day. If it takes more than 2 days, there’s something wrong.
+
+Finally,
+```
+sbatch 05_run_gRodon.sh
+```
+
+The final output file is ```gRodon_estimates.csv```
+### Understanding these results:
+Here's an example output:
+```
+"Genome",           "CUBHE",  "ConsistencyHE",  "CPB",     "FilteredSequences",  "DoublingTime_hr",  "LowerCI",         "UpperCI"
+"GCA_5.1_genomic",  0.563,    0.498,             -0.234,   298,                  7.71304835739319,   5.61197311521796,  10.7607167798235
+```
+
+1. ```Genome```: The GTDB accession ID of the ASV
+2. ```CUBHE``` (Codon Usage Bias of Highly Expressed genes): A score of how optimized the genes are. Higher values = predicted faster growth.
+3. ```ConsistencyHE```: Measures if the ribosomal proteins have similar codon usage. Higher is better; low values mean the prediction might be unreliable.
+4. ```CPB``` (Codon Pair Bias): A secondary metric measuring bias in pairs of codons across the whole genome. Used to refine the growth prediction.
+5. ```FilteredSequences```: The number of genes thrown out of the analysis because they were too short or had errors.
+6. ```DoublingTime_hr```: The estimated minimal doubling time in hours. Lower number = faster growth.
+7. ```LowerCI / UpperCI```: The 95% confidence interval (range of error). The true doubling time likely falls between these two numbers.
+
+Congrats! You have successfully predicted the maximal growth rates of ASVs in your samples!
+
+# Next steps
+Please make sure to cite all the appropriate scientists for their awesome work on this pipeline!
+Dhiraj S Naidu (me!) - For enduring long hours of coding, troubleshooting, and optimizing. (https://github.com/dhixraj)
+Hannah Holland-Moritz - For guidance and support in every step of the process. (https://github.com/hhollandmoritz)
+JL Weissman - For developing gRodon. (https://github.com/jlw-ecoevo)
+Torsten Seemann - For developing Prokka. (https://github.com/tseemann)
+Nathan D Blais - For mentoring me and pushing me to do more. 
