@@ -30,7 +30,7 @@ sbatch 00_setup_directories.sh
 ```
 for me. This will set up all the directories needed to keep your output files nice and organized.
 
-Ensure that you have an outputs directory created outside your scripts directory.
+Check that you have a new outputs directory created outside your scripts directory.
 
 # 01. Taxonomic Classification
 In this step, we are comparing (BLASTing) each of your ASV sequences against the known representative 16s rRNA sequences in the GTDB database.
