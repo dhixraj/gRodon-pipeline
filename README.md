@@ -7,10 +7,10 @@ This pipeline estimates maximal bacterial growth rates of ASVs from 16S rRNA amp
 
 # Prelimemary Checklist - Before you begin
 ### There are a few essentials you need before you can run this pipeline:
-1. Ensure that you have processed your data through the dada2pipeline (https://github.com/ErnakovichLab/dada2_ernakovichlab). This will produce a repset.fasta file (in the 03_tabletax folder).
+1. Ensure that you have processed your data through the [dada2pipeline](https://github.com/ErnakovichLab/dada2_ernakovichlab). This will produce a repset.fasta file (in the 03_tabletax folder).
 2. Ensure that you know your desired BLAST settings as this can vary per project. I will talk about this more during the BLAST step.
-3. Familiarize yourself with how Prokka works (https://github.com/tseemann/prokka).
-4. And finally, familiarize yourself with how gRodon works (https://github.com/jlw-ecoevo/gRodon2).
+3. Familiarize yourself with how [Prokka works](https://github.com/tseemann/prokka).
+4. And finally, familiarize yourself with how [gRodon works](https://github.com/jlw-ecoevo/gRodon2).
 
 ### NOTE: There is a newer program developed by JL called Phydon. Look into it.
 
@@ -18,7 +18,8 @@ This pipeline estimates maximal bacterial growth rates of ASVs from 16S rRNA amp
 Once you have logged in, you can download a copy of the tutorial into your directory on the server. To retrieve the folder with this tutorial from github directly to the server, type the following into your terminal.
 
 ```bash
-wget https://github.com/dhixraj/gRodon-pipeline/
+git clone [https://github.com/dhixraj/gRodon-pipeline.git](https://github.com/dhixraj/gRodon-pipeline.git)
+cd gRodon-pipeline
 ```
 This pipeline is developed with settings that you can change based on your requirements. The ```scripts``` folder has slurm/R scripts that are ready to be submitted (which small changes to file paths, of course). 
 
@@ -131,8 +132,8 @@ Congrats! You have successfully predicted the maximal growth rates of ASVs in yo
 
 # Next steps
 Please make sure to cite all the appropriate scientists for their awesome work on this pipeline!
-1. Dhiraj S Naidu (me!) - For enduring long hours of coding, troubleshooting, and optimizing. (https://github.com/dhixraj)
-2. Hannah Holland-Moritz - For guidance and support in every step of the process. (https://github.com/hhollandmoritz)
-3. JL Weissman - For developing gRodon. (https://github.com/jlw-ecoevo)
-4. Torsten Seemann - For developing Prokka. (https://github.com/tseemann)
+1. [Dhiraj S Naidu](https://github.com/dhixraj) (me!) - For enduring long hours of coding, troubleshooting, and optimizing. 
+2. [Hannah Holland-Moritz](https://github.com/hhollandmoritz) - For guidance and support in every step of the process. 
+3. [JL Weissman](https://github.com/jlw-ecoevo) - For developing gRodon. 
+4. [Torsten Seemann](https://github.com/tseemann) - For developing Prokka. 
 5. Nathan D Blais - For mentoring me and pushing me to do more. 
