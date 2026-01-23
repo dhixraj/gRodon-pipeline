@@ -130,7 +130,7 @@ Here's an example output:
 
 Congrats! You have successfully predicted the maximal growth rates of ASVs in your samples!
 
-# Next steps
+# Acknowledgements and Citations
 Please make sure to cite all the appropriate scientists for their awesome work on this pipeline!
 1. [Dhiraj S Naidu](https://github.com/dhixraj) (me!) - For enduring long hours of coding, troubleshooting, and optimizing. 
 2. [Hannah Holland-Moritz](https://github.com/hhollandmoritz) - For guidance and support in every step of the process. 
