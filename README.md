@@ -6,13 +6,16 @@ This pipeline estimates maximal bacterial growth rates of ASVs from 16S rRNA amp
 4. Growth Rate Prediction (gRodon): The gRodon package calculates the maximal growth rate through codon usage bias.
 
 # Prelimemary Checklist - Before you begin
-### There are a few essentials you need before you can run this pipeline:
+#### There are a few essentials you need before you can run this pipeline:
 1. Ensure that you have processed your data through the [dada2pipeline](https://github.com/ErnakovichLab/dada2_ernakovichlab). This will produce a repset.fasta file (in the 03_tabletax folder).
 2. Ensure that you know your desired BLAST settings as this can vary per project. I will talk about this more during the BLAST step.
 3. Familiarize yourself with how [Prokka works](https://github.com/tseemann/prokka).
 4. And finally, familiarize yourself with how [gRodon works](https://github.com/jlw-ecoevo/gRodon2).
 
-### NOTE: There is a newer program developed by JL called Phydon. Look into it.
+| <span>                                                                                                                                                                                                                                                       |
+|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **NOTE:** There is a newer program developed by JL called Phydon. Look into it. |
+| <span>     
 
 # Downloading the pipeline
 Once you have logged in, you can download a copy of the tutorial into your directory on the server. To retrieve the folder with this tutorial from github directly to the server, type the following into your terminal.
@@ -49,7 +52,10 @@ Optimization settings:
 3. ```max_target_seqs 1```: keeps only the best hit, prevents redundant hits for the same genome. You might want more hits - something to consider.
 4. ```max_hsps 1```: this basically tells BLAST - For any given ASV and the database sequence it matches, only show me the single best alignment region. Don't show me other weaker alignments!
 
-### NOTE: This is a <ins>LONG STEP</ins>!
+| <span>                                                                                                                                                                                                                                                       |
+|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **NOTE:** This is a <ins>LONG STEP</ins>! |
+| <span>     
 
 Ready to use blast? Go ahead and
 ```bash
@@ -58,7 +64,7 @@ sbatch 01_taxonomic_classification_blast.sh
 for me. 
 
 This gives us the output file ```blast_results.txt```
-### Understanding these results:
+#### Understanding these results:
 Here's an example output:
 ```
 ASV_52732 GB_GCA_000756795.1~CCSI01000004.1 97.088 373 67 9 2 368 473 840 1.29e-63 246
@@ -98,7 +104,10 @@ The goal of this step is to use ```Prokka``` to perform rapid gene prediction an
 
 Some context – An open reading frame (ORF) is a part of the DNA (or RNA) sequence that can be translated into amino acids (which make up proteins). It is a stretch of codons that begins with a start codon (ATG in DNA, translated into AUG in mRNA), and ends with a stop codon (TAA/TAG/TGA, translated into UAA/UAG/UGA in mRNA). Prodigal is used to find and predict ORFs from our sequences. Prokka can find the ORFs and assign gene functions together.
 
-### NOTE: This is a <ins>LONG STEP</ins>!
+| <span>                                                                                                                                                                                                                                                       |
+|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **NOTE:** This is a <ins>LONG STEP</ins>! |
+| <span>     
 
 You know what to do
 ```
@@ -106,11 +115,14 @@ sbatch scripts/04_run_prokka.sh
 ```
 The annotated files are in the ```prokka_annotations``` folder.
 
-## 05. Running gRodon
+# 05. Running gRodon
 You have made it to the last step of this pipeline with (hopefully) no issues! We will finally be running gRodon on the genomes to predict their growth rates.
 This step has a slurm script AND an R script (since gRodon is an R package). 
 
-### NOTE: Depending on the number of samples and species diversity, this step can take anywhere from 5-6 hours to a whole day. If it takes more than 2 days, there’s something wrong.
+| <span>                                                                                                                                                                                                                                                       |
+|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **NOTE:** Depending on the number of samples and species diversity, this step can take anywhere from 5-6 hours to a whole day. If it takes more than 2 days, there’s something wrong. |
+| <span>     
 
 Finally,
 ```
@@ -118,7 +130,7 @@ sbatch 05_run_gRodon.sh
 ```
 
 The final output file is ```gRodon_estimates.csv```
-### Understanding these results:
+#### Understanding these results:
 Here's an example output:
 ```
 "Genome",           "CUBHE",  "ConsistencyHE",  "CPB",     "FilteredSequences",  "DoublingTime_hr",  "LowerCI",         "UpperCI"
