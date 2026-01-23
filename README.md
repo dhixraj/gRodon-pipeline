@@ -18,7 +18,7 @@ This pipeline estimates maximal bacterial growth rates of ASVs from 16S rRNA amp
 Once you have logged in, you can download a copy of the tutorial into your directory on the server. To retrieve the folder with this tutorial from github directly to the server, type the following into your terminal.
 
 ```bash
-git clone [https://github.com/dhixraj/gRodon-pipeline.git](https://github.com/dhixraj/gRodon-pipeline.git)
+git clone https://github.com/dhixraj/gRodon-pipeline.git
 cd gRodon-pipeline
 ```
 This pipeline is developed with settings that you can change based on your requirements. The ```scripts``` folder has slurm/R scripts that are ready to be submitted (which small changes to file paths, of course). 
