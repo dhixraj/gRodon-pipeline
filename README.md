@@ -1,4 +1,4 @@
-# GENERAL OVERVIEW OF PIPELINE
+# General overview of pipeline
 This pipeline estimates maximal bacterial growth rates of ASVs from 16S rRNA amplicon data using gRodon by retrieving species-specific metagenomes from GTDB. The whole process involves the following steps:
 1. Taxonomic Mapping (BLAST): ASV sequences are aligned against the GTDB Small Subunit (SSU) representative database to find the closest matching reference genome.
 2. Genome Retrieval: The full genome assemblies for the matched GTDB accessions are retrieved/filtered from the GTDB database.
