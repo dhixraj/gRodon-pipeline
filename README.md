@@ -6,7 +6,7 @@ This pipeline estimates maximal bacterial growth rates of ASVs from 16S rRNA amp
 4. Growth Rate Prediction (gRodon): The gRodon package calculates the maximal growth rate through codon usage bias.
 
 # Prelimemary Checklist - Before you begin
-#### There are a few essentials you need before you can run this pipeline:
+There are a few essentials you need before you can run this pipeline:
 1. Ensure that you have processed your data through the [dada2pipeline](https://github.com/ErnakovichLab/dada2_ernakovichlab). This will produce a repset.fasta file (in the 03_tabletax folder).
 2. Ensure that you know your desired BLAST settings as this can vary per project. I will talk about this more during the BLAST step.
 3. Familiarize yourself with how [Prokka works](https://github.com/tseemann/prokka).
@@ -36,7 +36,7 @@ Organization. Super important. Go ahead and
 ```bash
 sbatch 00_setup_directories.sh
 ```
-for me. This will set up all the directories needed to keep your output files nice and organized.
+This will set up all the directories needed to keep your output files nice and organized.
 
 Check that you have a new outputs directory created outside your scripts directory.
 
@@ -61,10 +61,10 @@ Ready to use blast? Go ahead and
 ```bash
 sbatch 01_taxonomic_classification_blast.sh
 ```
-for me. 
+for me. This gives us the output file ```blast_results.txt```
 
-This gives us the output file ```blast_results.txt```
-#### Understanding these results:
+**Understanding these results:**
+
 Here's an example output:
 ```
 ASV_52732 GB_GCA_000756795.1~CCSI01000004.1 97.088 373 67 9 2 368 473 840 1.29e-63 246
@@ -130,7 +130,9 @@ sbatch 05_run_gRodon.sh
 ```
 
 The final output file is ```gRodon_estimates.csv```
-#### Understanding these results:
+
+**Understanding these results:**
+
 Here's an example output:
 ```
 "Genome",           "CUBHE",  "ConsistencyHE",  "CPB",     "FilteredSequences",  "DoublingTime_hr",  "LowerCI",         "UpperCI"
