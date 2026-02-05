@@ -14,7 +14,7 @@ There are a few essentials you need before you can run this pipeline:
 
 | <span>                                                                                                                                                                                                                                                       |
 |:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **NOTE:** There is a newer program developed by JL called Phydon. Look into it. |
+| **NOTE:** There is a newer program developed by JL called [Phydon](https://github.com/xl0418/Phydon). Look into it. |
 | <span>     
 
 # Downloading the pipeline
@@ -152,6 +152,6 @@ Congrats! You have successfully predicted the maximal growth rates of ASVs in yo
 # Acknowledgements and Citations
 Please make sure to cite all the appropriate scientists for their awesome work on this pipeline! 
 1. [Hannah Holland-Moritz](https://github.com/hhollandmoritz) - For guidance and support in every step of the process. 
-2. [JL Weissman](https://github.com/jlw-ecoevo) - For developing [gRodon.](https://www.nature.com/articles/s41467-025-59558-9)
-3. [Torsten Seemann](https://github.com/tseemann) - For developing [Prokka.](https://academic.oup.com/bioinformatics/article/30/14/2068/2390517)
+2. [JL Weissman](https://github.com/jlw-ecoevo) - For developing [gRodon](https://www.nature.com/articles/s41467-025-59558-9).
+3. [Torsten Seemann](https://github.com/tseemann) - For developing [Prokka](https://academic.oup.com/bioinformatics/article/30/14/2068/2390517).
 4. Nathan D Blais - For mentoring me and pushing me to do more.
