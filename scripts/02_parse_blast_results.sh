@@ -26,8 +26,8 @@ if [[ ! -f "${BLAST_RESULTS}" ]]; then
 fi
 
 # --- Parsing BLAST results into a readable summary file ---
-# Columns in outfmt 6:      qseqid      sseqid                  pident  length  mismatch gapopen qstart qend sstart send evalue bitscore
-# Here's an example output: ASV1        GCF_000277795.1_genomic 99.5    253     0        0       1      253  1      253  1e-120 520
+# Columns in outfmt:      qseqid      sseqid                  pident  length  mismatch gapopen qstart qend sstart send evalue bitscore
+# Here's an example output: ASV1      GCF_000277795.1_genomic 99.5    253     0        0       1      253  1      253  1e-120 520
 
 echo -e "QueryID\tGenomeID\tPercentIdentity\tAlignmentLength\tEvalue\tBitScore" > "${OUT_PARSED}"
 awk '{print $1"\t"$2"\t"$3"\t"$4"\t"$11"\t"$12}' "${BLAST_RESULTS}" >> "${OUT_PARSED}"
@@ -40,7 +40,7 @@ awk 'NR>1 {print $2}' "${OUT_PARSED}" | sed 's/^RS_//; s/^GB_//' | sort -u > "${
 TOTAL_HITS=$(($(wc -l < "${OUT_PARSED}") - 1))
 TOTAL_ACCESSIONS=$(wc -l < "${GTDB_ACCESSIONS_LIST}")
 
+echo "Step 02: BLAST parsing complete."
 echo "Parsed ${TOTAL_HITS} BLAST hits into: ${OUT_PARSED}"
 echo "Found ${TOTAL_ACCESSIONS} unique GTDB genome accessions."
-echo "Accessions list saved to ${GTDB_ACCESSIONS_LIST}"
 date

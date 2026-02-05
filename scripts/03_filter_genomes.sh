@@ -31,5 +31,7 @@ rm "${FILTERED_GENOMES_DIR}/temp_accessions.txt"
 
 # --- Summary ---
 COPIED=$(ls "${FILTERED_GENOMES_DIR}"/*.fna.gz 2>/dev/null | wc -l)
+
+echo "Step 03: Genome filtering complete."
 echo "Copied ${COPIED} genomes into ${FILTERED_GENOMES_DIR}."
 date

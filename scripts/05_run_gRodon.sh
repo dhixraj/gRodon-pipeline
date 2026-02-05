@@ -18,6 +18,6 @@ R_SCRIPT="05_run_gRodon.R"
 
 echo "Starting gRodon..."
 Rscript "${R_SCRIPT}"
-echo "Job finished successfully!"
+echo "Step 05: gRodon ran successfully."
 date
-echo "=== Thanks for using the gRodon_ernakovich pipeline. PLease cite appropriately! ==="
+echo "=== Thanks for using the gRodon_ernakovich pipeline. Please cite appropriately! ==="

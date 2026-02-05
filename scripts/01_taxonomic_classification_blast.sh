@@ -16,7 +16,7 @@ conda activate gRodon_ernakovich
 # --- Configuration ---
 # --- CHANGE QUERY TO THE LOCATION OF YOUR repset.fasta FILE (LOCATED IN THE 03 FOLDER OF THE DADA2 OUTPUTS)
 QUERY="/mnt/home/ernakovich/--YOUR_USERNAME--/dada2_output_run2/03_tabletax/repset.fasta"
-DB="../gtdb_files/ssu_reps_r207/ssu_reps_db"
+DB="/mnt/home/ernakovich/shared/db_files/GTDB/ssu_reps_r207/ssu_reps_db"
 OUT="../outputs/blast_results.txt"
 
 # --- Running BLAST ---
