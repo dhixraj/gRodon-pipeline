@@ -10,7 +10,7 @@ There are a few essentials you need before you can run this pipeline:
 1. Ensure that you have processed your data through the [dada2pipeline](https://github.com/ErnakovichLab/dada2_ernakovichlab). This will produce a repset.fasta file (in the 03_tabletax folder).
 2. Ensure that you know your desired BLAST settings as this can vary per project. I will talk about this more during the BLAST step.
 3. Familiarize yourself with how [Prokka works](https://github.com/tseemann/prokka).
-4. And finally, familiarize yourself with how [gRodon works](https://github.com/jlw-ecoevo/gRodon2).
+4. And finally, familiarize yourself with how [gRodon works](https://github.com/jlw-ecoevo/gRodon2). Here's a [vignette](https://www.microbialgamut.com/gRodon-vignette)
 
 | <span>                                                                                                                                                                                                                                                       |
 |:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
