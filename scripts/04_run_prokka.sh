@@ -11,13 +11,14 @@
 
 # --- Load environment ---
 module purge
-module load linuxbrew/colsa
+module load linuxbrew/colsa # consider adding what programs you are using in linuxbrew/colsa, so others who don't have access to premise can know what they will need to install. You can add it to the documentation in the readme. -hhm. 
 
 # --- Configuration ---
 GENOMES_DIR="../outputs/gRodon_filtered_genomes"
 PROKKA_OUTPUT_DIR="../outputs/prokka_annotations"
 
 # --- Define the Prokka function ---
+# very nice -hhm
 run_prokka() {
     local compressed_file="$1"
     local base_name
@@ -46,6 +47,7 @@ export -f run_prokka
 export PROKKA_OUTPUT_DIR
 
 # --- Running all genomes in parallel using available CPUs ---
+# Unfortunatley, I don't think this actually runs prokka in parallel (have you checked while it's running to see if it is?) -hhm
 CORES=$SLURM_CPUS_PER_TASK
 find "${GENOMES_DIR}" -name "*.fna.gz" | \
   xargs -P "${CORES}" -I {} bash -c 'run_prokka "{}"'

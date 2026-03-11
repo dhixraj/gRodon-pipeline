@@ -4,9 +4,9 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
-#SBATCH --mem=2G
+#SBATCH --mem=2G # This step probably doesn't take 2G of memory - hhm. In fact it probably doesn't need to be run on the job scheduler at all unless you have tones of files. 
 
-# --- This step is extracting the unique GTDB accession numbers from blast_results.txt and saving them to a file. These accession numbers corrrespond to genomes in the database.
+# --- This step is extracting the unique GTDB accession numbers from blast_results.txt and saving them to a file. These accession numbers corrrespond to genomes in the database. # I like how you define what these functions all do! -hhm
 # --- QUICK STEP, UNDER 5 MINUTES.
 
 # --- Load environment ---
@@ -33,7 +33,7 @@ echo -e "QueryID\tGenomeID\tPercentIdentity\tAlignmentLength\tEvalue\tBitScore" 
 awk '{print $1"\t"$2"\t"$3"\t"$4"\t"$11"\t"$12}' "${BLAST_RESULTS}" >> "${OUT_PARSED}"
 
 # --- Extracting unique genome accession numbers for downstream filtering ---
-# Removes any prefixes like "RS_" or "GB_" and keeps only unique IDs.
+# Removes any prefixes like "RS_" or "GB_" and keeps only unique IDs. # what do the RS_ and GB_ prefixes mean? Aren't they part of the accession numbers? To make this comment more informative to the user, you could say something like "remove the prefixes because they are not in the genome file names.", or something similar -hhm. 
 awk 'NR>1 {print $2}' "${OUT_PARSED}" | sed 's/^RS_//; s/^GB_//' | sort -u > "${GTDB_ACCESSIONS_LIST}"
 
 # --- Summary ---
