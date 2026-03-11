@@ -11,7 +11,7 @@
 # --- Load module ---
 module purge
 module load anaconda/colsa
-conda activate gRodon_ernakovich
+conda activate gRodon_ernakovich # let's create a .yml file with your conda environment and include it in the code base so that it can be shared. 
 
 # --- Configuration ---
 # --- CHANGE QUERY TO THE LOCATION OF YOUR repset.fasta FILE (LOCATED IN THE 03 FOLDER OF THE DADA2 OUTPUTS)
