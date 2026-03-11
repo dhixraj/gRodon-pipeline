@@ -4,6 +4,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=1G
+# Consider if these settings are necessary (particularly the amount of memory) for simply setting up directories. -hhm
 
 # --- Input/output directories
 OUTPUT_DIR="../outputs"

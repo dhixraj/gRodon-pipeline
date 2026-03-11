@@ -11,7 +11,7 @@
 # --- Load module ---
 module purge
 module load anaconda/colsa
-conda activate gRodon_ernakovich
+conda activate gRodon_ernakovich # let's create a .yml file with your conda environment and include it in the code base so that it can be shared. 
 
 # --- Configuration ---
 # --- CHANGE QUERY TO THE LOCATION OF YOUR repset.fasta FILE (LOCATED IN THE 03 FOLDER OF THE DADA2 OUTPUTS)
@@ -20,6 +20,13 @@ DB="/mnt/home/ernakovich/shared/db_files/GTDB/ssu_reps_r207/ssu_reps_db"
 OUT="../outputs/blast_results.txt"
 
 # --- Running BLAST ---
+# moving the comments before the code makes it easier for users to know ahead of time what they need to chance -hhm. 
+# --- Details about blast optimization: 
+# 1. Using megablast: much more efficient and quicker.
+# 2. perc_identity 95: CHANGE ME BASED ON YOUR PROJECT! 95-97 percent identity is usually good, but you can make this higher/lower depending on your project.
+# 3. max_target_seqs 1: keeps only the best hit, prevents redundant hits for the same genome. You might want more hits - something to consider.
+# 4. max_hsps 1: this basically tells BLAST - For any given ASV and the database sequence it matches, only show me the single best alignment region. Don't show me other weaker alignments!
+
 blastn \
     -task megablast \
     -query "${QUERY}" \
@@ -32,11 +39,6 @@ blastn \
     -max_hsps 1 \
     -num_threads 8
 
-# --- Details about blast optimization:
-# 1. Using megablast: much more efficient and quicker.
-# 2. perc_identity 95: CHANGE ME BASED ON YOUR PROJECT! 95-97 percent identity is usually good, but you can make this higher/lower depending on your project.
-# 3. max_target_seqs 1: keeps only the best hit, prevents redundant hits for the same genome. You might want more hits - something to consider.
-# 4. max_hsps 1: this basically tells BLAST - For any given ASV and the database sequence it matches, only show me the single best alignment region. Don't show me other weaker alignments!
 
 echo "Step 01: Blast complete. Results saved to ${OUT}"
 date
